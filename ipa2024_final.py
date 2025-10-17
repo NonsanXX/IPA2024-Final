@@ -85,22 +85,26 @@ while True:
 
         # 5. Complete the logic for each command
 
-        if command == "create":
-            responseMessage = restconf_final.create()
-        elif command == "delete":
-            responseMessage = restconf_final.delete()
-        elif command == "enable":
-            responseMessage = restconf_final.enable()
-        elif command == "disable":
-            responseMessage = restconf_final.disable()
-        elif command == "status":
-            responseMessage = restconf_final.status()
-        elif command == "gigabit_status":
-            responseMessage = netmiko_final.gigabit_status()
-        elif command == "showrun":
-            responseMessage = ansible_final.showrun()
-        else:
-            responseMessage = "Error: No command or unknown command"
+        try:
+            if command == "create":
+                responseMessage = restconf_final.create()
+            elif command == "delete":
+                responseMessage = restconf_final.delete()
+            elif command == "enable":
+                responseMessage = restconf_final.enable()
+            elif command == "disable":
+                responseMessage = restconf_final.disable()
+            elif command == "status":
+                responseMessage = restconf_final.status()
+            elif command == "gigabit_status":
+                responseMessage = netmiko_final.gigabit_status()
+            elif command == "showrun":
+                responseMessage = ansible_final.showrun()
+            else:
+                responseMessage = "Error: No command or unknown command"
+        except Exception as e:
+            print(f"Error executing command '{command}': {e}")
+            responseMessage = f"Error: Failed to execute command '{command}'"
 
         # 6. Complete the code to post the message to the Webex Teams room.
 

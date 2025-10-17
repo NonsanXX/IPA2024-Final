@@ -10,7 +10,9 @@ device_params = {
     "ip": device_ip,
     "username": username,
     "password": password,
-    "conn_timeout": 60
+    "conn_timeout": 60,
+    "read_timeout_override": 120,
+    "session_timeout": 120
 }
 
 
@@ -22,6 +24,7 @@ def gigabit_status():
         admin_down = 0
         result = ssh.send_command("show ip interface brief", use_textfsm=True)
         for status in result:
+            print(status)
             if status["interface"].startswith("GigabitEthernet"):
                 # Check the status of the interface
                 if status["status"] == "up":
