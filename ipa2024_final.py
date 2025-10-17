@@ -119,18 +119,19 @@ while True:
 
         if command == "showrun" and responseMessage == "ok":
 
-            filename = "<!!!REPLACEME with show run filename and path!!!>"
-            fileobject = <!!!REPLACEME with open file!!!>
-            filetype = "<!!!REPLACEME with Content-type of the file!!!>"
+            filepath = "ansible/backups/show_run_66070305_R1-Exam.txt"
+            filename = "show_run_66070305_R1-Exam.txt"
+            fileobject = open(filepath, "rb")
+            filetype = "text/plain"
             postData = {
                 "roomId": roomIdToGetMessages,
                 "text": "show running config",
-                "files": (<!!!REPLACEME!!!>, <!!!REPLACEME!!!>, <!!!REPLACEME!!!>),
+                "files": (filename, fileobject, filetype),
             }
-            postData = MultipartEncoder(<!!!REPLACEME!!!>)
+            postData = MultipartEncoder(postData)
             HTTPHeaders = {
-            "Authorization": ACCESS_TOKEN,
-            "Content-Type": <!!!REPLACEME with postData Content-Type!!!>,
+            "Authorization": "Bearer " + ACCESS_TOKEN,
+            "Content-Type": postData.content_type,
             }
         # other commands only send text, or no attached file.
         else:
@@ -144,15 +145,15 @@ while True:
                 "Accept": "application/json",
             }
 
-            # Post the call to the Webex Teams message API.
-            r = requests.post(
-                "https://webexapis.com/v1/messages",
-                data=postData,
-                headers=HTTPHeaders,
-            )
-            if not r.status_code == 200:
-                raise Exception(
-                    "Incorrect reply from Webex Teams API. Status code: {}".format(
-                        r.status_code
-                    )
+        # Post the call to the Webex Teams message API.
+        r = requests.post(
+            "https://webexapis.com/v1/messages",
+            data=postData,
+            headers=HTTPHeaders,
+        )
+        if not r.status_code == 200:
+            raise Exception(
+                "Incorrect reply from Webex Teams API. Status code: {}".format(
+                    r.status_code
                 )
+            )
