@@ -126,9 +126,3 @@ def status():
         return "No Interface loopback 66070305"
     else:
         print("Error. Status Code: {}".format(resp.status_code))
-
-
-# def gigabit_status():
-
-
-# def showrun():

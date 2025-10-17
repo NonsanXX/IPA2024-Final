@@ -10,7 +10,7 @@ import requests
 import json
 import time
 import os
-import restconf_final
+import restconf_final, netmiko_final, ansible_final
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 from dotenv import load_dotenv
 
@@ -95,10 +95,10 @@ while True:
             responseMessage = restconf_final.disable()
         elif command == "status":
             responseMessage = restconf_final.status()
-        # elif command == "gigabit_status":
-        #     responseMessage = restconf_final.gigabit_status()
-        # elif command == "showrun":
-        #     responseMessage = restconf_final.showrun()
+        elif command == "gigabit_status":
+            responseMessage = netmiko_final.gigabit_status()
+        elif command == "showrun":
+            responseMessage = ansible_final.showrun()
         else:
             responseMessage = "Error: No command or unknown command"
 
@@ -118,20 +118,20 @@ while True:
         
 
         if command == "showrun" and responseMessage == "ok":
-            continue
-            # filename = "<!!!REPLACEME with show run filename and path!!!>"
-            # fileobject = <!!!REPLACEME with open file!!!>
-            # filetype = "<!!!REPLACEME with Content-type of the file!!!>"
-            # postData = {
-            #     "roomId": <!!!REPLACEME!!!>,
-            #     "text": "show running config",
-            #     "files": (<!!!REPLACEME!!!>, <!!!REPLACEME!!!>, <!!!REPLACEME!!!>),
-            # }
-            # postData = MultipartEncoder(<!!!REPLACEME!!!>)
-            # HTTPHeaders = {
-            # "Authorization": ACCESS_TOKEN,
-            # "Content-Type": <!!!REPLACEME with postData Content-Type!!!>,
-            # }
+
+            filename = "<!!!REPLACEME with show run filename and path!!!>"
+            fileobject = <!!!REPLACEME with open file!!!>
+            filetype = "<!!!REPLACEME with Content-type of the file!!!>"
+            postData = {
+                "roomId": roomIdToGetMessages,
+                "text": "show running config",
+                "files": (<!!!REPLACEME!!!>, <!!!REPLACEME!!!>, <!!!REPLACEME!!!>),
+            }
+            postData = MultipartEncoder(<!!!REPLACEME!!!>)
+            HTTPHeaders = {
+            "Authorization": ACCESS_TOKEN,
+            "Content-Type": <!!!REPLACEME with postData Content-Type!!!>,
+            }
         # other commands only send text, or no attached file.
         else:
             postData = {"roomId": roomIdToGetMessages, "text": responseMessage}
