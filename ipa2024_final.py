@@ -25,7 +25,7 @@ ACCESS_TOKEN = os.environ.get("TOKEN")
 # 3. Prepare parameters get the latest message for messages API.
 
 # Defines a variable that will hold the roomId
-roomIdToGetMessages = "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vM2M3NDNhMjAtNmMzMi0xMWYwLWI3ODAtYzNkMjFmODljOTE2"
+roomIdToGetMessages = "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vYmQwODczMTAtNmMyNi0xMWYwLWE1MWMtNzkzZDM2ZjZjM2Zm"
 
 while True:
     # always add 1 second of delay to the loop to not go over a rate limit of API calls

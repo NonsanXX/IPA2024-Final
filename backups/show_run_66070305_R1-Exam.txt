@@ -1,8 +1,8 @@
 Building configuration...
 
-Current configuration : 4997 bytes
+Current configuration : 5109 bytes
 !
-! Last configuration change at 14:35:17 UTC Sat Oct 18 2025 by NETCONF
+! Last configuration change at 14:49:35 UTC Sat Oct 18 2025 by NETCONF
 !
 version 16.9
 service timestamps debug datetime msec
@@ -148,6 +148,7 @@ interface Loopback66070007
 interface Loopback66070101
  description Created by 66070101
  ip address 172.1.1.1 255.255.255.0
+ shutdown
 !
 interface Loopback66070118
  description Interface created by RESTCONF Bot
@@ -174,6 +175,10 @@ interface Loopback66070221
 interface Loopback66070225
  description Ola
  ip address 172.2.25.1 255.255.255.0
+!
+interface Loopback66070246
+ description Configured by RESTCONF
+ ip address 172.3.25.1 255.255.255.0
 !
 interface Loopback66070247
  description Loopback interface for 66070247
