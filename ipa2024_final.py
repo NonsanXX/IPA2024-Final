@@ -123,7 +123,7 @@ while True:
 
         if command == "showrun" and responseMessage == "ok":
 
-            filepath = "ansible/backups/show_run_66070305_R1-Exam.txt"
+            filepath = "backups/show_run_66070305_R1-Exam.txt"
             filename = "show_run_66070305_R1-Exam.txt"
             fileobject = open(filepath, "rb")
             filetype = "text/plain"
