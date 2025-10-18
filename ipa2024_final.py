@@ -27,6 +27,23 @@ ACCESS_TOKEN = os.environ.get("TOKEN")
 # Defines a variable that will hold the roomId
 roomIdToGetMessages = "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vYmQwODczMTAtNmMyNi0xMWYwLWE1MWMtNzkzZDM2ZjZjM2Zm"
 
+# Get room title once before the loop
+r = requests.get(
+    "https://webexapis.com/v1/rooms/{}".format(roomIdToGetMessages),
+    headers={"Authorization": "Bearer " + ACCESS_TOKEN}
+)
+
+if not r.status_code == 200:
+    raise Exception(
+        "Incorrect reply from Webex Teams API. Status code: {}".format(
+            r.status_code
+        )
+    )
+
+json_data = r.json()
+roomTitle = json_data["title"]
+print("Room Title: " + roomTitle)
+
 while True:
     # always add 1 second of delay to the loop to not go over a rate limit of API calls
     time.sleep(1)
