@@ -7,6 +7,8 @@
   vars:
     ansible_network_os: cisco.ios.ios
     student_id: "66070305"
+    ansible_command_timeout: 60
+    ansible_connect_timeout: 60
 
   tasks:
     - name: Check connectivity (show clock)
@@ -14,12 +16,18 @@
         commands:
           - show clock
       register: clock_output
+      retries: 3
+      delay: 5
+      until: clock_output is succeeded
 
     - name: Get hostname
       cisco.ios.ios_command:
         commands:
           - show running-config | include ^hostname
       register: host_output
+      retries: 3
+      delay: 5
+      until: host_output is succeeded
 
     - name: Extract hostname
       ansible.builtin.set_fact:
@@ -30,6 +38,9 @@
         commands:
           - show running-config
       register: config_output
+      retries: 3
+      delay: 5
+      until: config_output is succeeded
 
     - name: Ensure local backups folder exists
       ansible.builtin.file:
